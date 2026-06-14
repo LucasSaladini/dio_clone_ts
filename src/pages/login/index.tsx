@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 
-import { Column, ErrorText, Wrapper, CriarText, EsqueciText, Row, SubTitleLogin, Title, TitleLogin, Container, TitleHighlight, TextContent } from "./styles";
+import { Column, Wrapper, CriarText, EsqueciText, Row, SubTitleLogin, Title, TitleLogin, Container, TitleHighlight, TextContent } from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
@@ -16,16 +16,18 @@ const schema = yup.object({
     password: yup.string().min(3, 'No mínimo 3 caracteres').required()
 })
 
+type IFormData = yup.InferType<typeof schema>;
+
 const Login = () => {
     const navigate = useNavigate();
 
-    const { control, handleSubmit, formState: { errors, isValid } } = useForm({
+    const { control, handleSubmit, formState: { errors, isValid } } = useForm<IFormData>({
         resolver: yupResolver(schema),
         mode: 'onChange'
     });
 
 
-    const onSubmit = async (formData) => {
+    const onSubmit = async (formData: IFormData) => {
         console.log("Submitted formData:", formData);
         try {
             const url = `users?email=${formData.email}&senha=${formData.password}`;
@@ -37,13 +39,13 @@ const Login = () => {
                 alert('Email ou senha inválidos');
             }
         } catch (err) {
-            alert('Houve um erro. Detalhes: ', err);
+            alert(`Houve um erro. Detalhes: ${err}`);
         }
     };
 
     return (
         <>
-            <Header />
+            <Header autenticado={false} />
             <Container>
                 <Column>
                     <Title>

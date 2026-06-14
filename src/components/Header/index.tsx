@@ -11,8 +11,9 @@ import {
     SearchInputContainer } from './styles';
 import logo from '../../assets/dio.png';
 import { Button } from '../Button';
+import type { IHeader } from './types';
 
-const Header = ({ autenticado }) => {
+const Header = ({ autenticado }: IHeader) => {
 
   const navigate = useNavigate();
 

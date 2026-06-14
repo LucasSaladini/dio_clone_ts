@@ -13,7 +13,7 @@ const Home = () => {
 
     return (
         <>
-            <Header />
+            <Header autenticado={false} />
             <HomeContainer>
                 <Wrapper>
                     <Title>

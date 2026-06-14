@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import type { IFeed } from "./types";
 
 export const HomeContainer = styled.main`
     width: 100%;
@@ -31,7 +32,7 @@ export const TitleHighlight = styled.h3`
     margin-bottom: 24px;
 `
 
-export const Column = styled.div`
+export const Column = styled.div<IFeed>`
     flex: ${({flex}) => flex};
     padding-right: 24px;
 `
