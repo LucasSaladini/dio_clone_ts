@@ -2,13 +2,12 @@ import { MdEmail, MdLock } from 'react-icons/md'
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { useContext } from 'react';
 
 import { Column, Wrapper, CriarText, EsqueciText, Row, SubTitleLogin, Title, TitleLogin, Container, TitleHighlight, TextContent } from "./styles";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
-import { AuthContext } from '../../context/auth';
+import { useAuth } from '../../hooks/useAuth';
 
 const schema = yup.object({
     email: yup.string().email('E-mail inválido').required('Email é obrigatório'),
@@ -18,7 +17,7 @@ const schema = yup.object({
 type IFormData = yup.InferType<typeof schema>;
 
 const Login = () => {
-    const { handleLogin} = useContext(AuthContext);
+    const { handleLogin} = useAuth();
 
     const { control, handleSubmit, formState: { errors } } = useForm<IFormData>({
         resolver: yupResolver(schema),

@@ -9,13 +9,12 @@ import {
     SearchInputContainer } from './styles';
 import logo from '../../assets/dio.png';
 import { Button } from '../Button';
-import { useContext } from 'react';
-import { AuthContext } from '../../context/auth';
+import { useAuth } from '../../hooks/useAuth';
 
 const Header = () => {
   const navigate = useNavigate();
 
-  const { user, handleSignOut } = useContext(AuthContext)
+  const { user, handleSignOut } = useAuth();
 
   const handleClickSignIn = () => {
       navigate('/login')
