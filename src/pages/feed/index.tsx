@@ -3,18 +3,15 @@ import { HomeContainer, Column, Title, TitleHighlight } from "./styles";
 import { Card } from "../../components/Card";
 import { UserInfo } from "../../components/UserInfo";
 import { Header } from "../../components/Header";
+import { useContext } from "react";
+import { AuthContext } from "../../context/auth";
 
 const Feed = () => {
-
-    const navigate = useNavigate();
-
-    const handleClickSignIn = () => {
-        navigate('/login')
-    }
+    const { user } = useContext(AuthContext);
 
     return (
         <>
-        <Header autenticado={true} />
+        <Header />
             <HomeContainer>
                 <Column flex={3}>
                     <Title>Feed</Title>

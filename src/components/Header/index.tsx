@@ -3,19 +3,19 @@ import {
     Wrapper, 
     Container, 
     Row, 
-    Column, 
     Menu, 
-    MenuRight, 
     UserPicture, 
     Input, 
     SearchInputContainer } from './styles';
 import logo from '../../assets/dio.png';
 import { Button } from '../Button';
-import type { IHeader } from './types';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/auth';
 
-const Header = ({ autenticado }: IHeader) => {
-
+const Header = () => {
   const navigate = useNavigate();
+
+  const { user, handleSignOut } = useContext(AuthContext)
 
   const handleClickSignIn = () => {
       navigate('/login')
@@ -26,7 +26,7 @@ const Header = ({ autenticado }: IHeader) => {
         <Container>
             <Row>
                 <img src={logo} alt="Logo DIO"  width={100}/>
-                {autenticado ? (
+                {user.id ? (
                     <>
                         <SearchInputContainer>
                             <Input placeholder="Buscar" />
@@ -37,8 +37,11 @@ const Header = ({ autenticado }: IHeader) => {
                 ) : null}
             </Row>
             <Row>
-                {autenticado ? (
-                    <UserPicture src="https://avatars.githubusercontent.com/u/45184516?v=4" />
+                {user.id ? (
+                    <>
+                        <UserPicture src="https://avatars.githubusercontent.com/u/45184516?v=4" />
+                        <a href='#' onClick={handleSignOut}>Sair</a>
+                    </>
                 ) : (
                     <>
                         <Button title="Entrar" onClick={handleClickSignIn} />
